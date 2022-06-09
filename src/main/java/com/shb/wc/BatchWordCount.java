@@ -15,7 +15,7 @@ public class BatchWordCount {
         // 2. 从文件读取数据 按行读取(存储的元素就是每行的文本)
         DataSource<String> lineDataSource = environment.readTextFile("input/words.txt");
         // 3. 将每行数据进行分词，然后转换成二元组数据类型（hello,1）
-        FlatMapOperator<String, Object> wordAndOne = lineDataSource.flatMap((String line, Collector<Tuple2<String, Long>> out) -> {
+        FlatMapOperator<String, Tuple2<String, Long>> wordAndOne = lineDataSource.flatMap((String line, Collector<Tuple2<String, Long>> out) -> {
             //将一行文本进行分词
             String[] words = line.split(" ");
             //将每个单词转换成二元组输出
